@@ -9,6 +9,7 @@ import android.app.AlarmManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.SystemClock;
 
 /**
@@ -98,9 +99,9 @@ public class ContentProviderTimeoutCache
             // all rows having that acronym else get the Acronym Data
             // from first row and add it to the List.
             else {
-                // TODO -- replace "0" with the expiration time of
+                // TO DO -- replace "0" with the expiration time of
                 // given acronym that's obtained from the cursor.
-                Long expirationTime = 0L;
+                Long expirationTime = cursor.getLong(cursor.getColumnIndex(AcronymEntry.COLUMN_EXPIRATION_TIME));
                 
                 // Check if the acronym is expired. If true, then
                 // remove it.
@@ -136,15 +137,15 @@ public class ContentProviderTimeoutCache
      * @return AcronymExpansion
      */
     private AcronymExpansion getAcronymExpansion(Cursor cursor) {
-        // TODO -- replace "null" with the "long form" of the acronym
+        // TO DO -- replace "null" with the "long form" of the acronym
         // obtained from the cursor.
-        String longForm = null;
-        // TODO -- replace "0" with the "frequency" value of the acronym
+        String longForm = cursor.getString(cursor.getColumnIndex(AcronymEntry.COLUMN_LONG_FORM));
+        // TO DO -- replace "0" with the "frequency" value of the acronym
         // obtained from the cursor.
-        int frequency = 0;
-        // TODO -- replace "0" with the "since" value of the acronym
+        int frequency = cursor.getInt(cursor.getColumnIndex(AcronymEntry.COLUMN_FREQUENCY));
+        // TO DO -- replace "0" with the "since" value of the acronym
         // obtained from the cursor.
-        int since = 0;
+        int since = cursor.getInt(cursor.getColumnIndex(AcronymEntry.COLUMN_SINCE));
         return new AcronymExpansion(longForm,
                                     frequency,
                                     since);
@@ -212,10 +213,16 @@ public class ContentProviderTimeoutCache
             new ContentValues[longForms.size()];
 
         for (int i = 0; i < longForms.size(); i++) {
-            // TODO -- as you loop through the list of acronym
+            // TO DO -- as you loop through the list of acronym
             // expansions create a ContentValues object that contains
             // their contents, and store this into the appropriate
             // location the cvArray.
+            cvArray[i] = new ContentValues();
+            cvArray[i].put(AcronymEntry.COLUMN_ACRONYM, acronym);
+            cvArray[i].put(AcronymEntry.COLUMN_LONG_FORM, longForms.get(i).getLf());
+            cvArray[i].put(AcronymEntry.COLUMN_FREQUENCY, longForms.get(i).getFreq());
+            cvArray[i].put(AcronymEntry.COLUMN_SINCE, longForms.get(i).getSince());
+            cvArray[i].put(AcronymEntry.COLUMN_EXPIRATION_TIME, expirationTime);
         }
 
         // Use ContentResolver to bulk insert the ContentValues into
@@ -238,7 +245,8 @@ public class ContentProviderTimeoutCache
         // Initializes an array to contain selection arguments
         String[] selectionArgs = { acronym };
 
-        // TODO - delete the row(s) associated with an acronym.
+        // TO DO - delete the row(s) associated with an acronym.
+        mContext.getContentResolver().delete(AcronymEntry.CONTENT_URI, SELECTION_ACRONYM, selectionArgs);
     }
 
     /**
@@ -274,7 +282,8 @@ public class ContentProviderTimeoutCache
             String.valueOf(System.nanoTime()) 
         };
 
-        // TODO -- delete expired acronym expansions.
+        // TO DO -- delete expired acronym expansions.
+        mContext.getContentResolver().delete(null, SELECTION_EXPIRATION, selectionArgs);
     }
 
     /**

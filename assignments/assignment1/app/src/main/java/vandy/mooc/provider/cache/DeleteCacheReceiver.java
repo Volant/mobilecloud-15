@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 /**
  * Broadcast receiver that will remove all the expired acronyms at regular
@@ -15,6 +16,12 @@ public class DeleteCacheReceiver extends BroadcastReceiver {
      * Private request code for sender that is passed in an Intent.
      */
     public static final int DELETE_CACHE_REQUEST_CODE = 100;
+
+    /**
+     * Debugging tag used by the Android logger.
+     */
+    private static final String TAG =
+            DeleteCacheReceiver.class.getSimpleName();
 
     /**
      * Factory method to make a Pending Intent that is used by
@@ -61,5 +68,9 @@ public class DeleteCacheReceiver extends BroadcastReceiver {
         // from the cache.
         // TODO -- you fill in here by calling the appropriate method in 
         // the ContentProviderTimeoutCache.
+        ContentProviderTimeoutCache cache = new ContentProviderTimeoutCache(context);
+        String acronym = intent.getDataString();
+        Log.d(TAG, "Delete cache receiver " + acronym);
+        cache.remove(acronym);
     }
 }
