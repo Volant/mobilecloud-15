@@ -1,0 +1,126 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .idea/
+* .idea/.name
+* .idea/compiler.xml
+* .idea/copyright/
+* .idea/copyright/profiles_settings.xml
+* .idea/misc.xml
+* .idea/modules.xml
+* .idea/vcs.xml
+* .idea/workspace.xml
+* app/
+* app/build.gradle
+* app/libs/
+* app/libs/retrofit-1.7.0.jar
+* app/src/
+* app/src/main/
+* app/src/main/AndroidManifest.xml
+* app/src/main/java/
+* app/src/main/java/vandy/
+* app/src/main/java/vandy/mooc/
+* app/src/main/java/vandy/mooc/activities/
+* app/src/main/java/vandy/mooc/activities/AcronymActivity.java
+* app/src/main/java/vandy/mooc/operations/
+* app/src/main/java/vandy/mooc/operations/AcronymOps.java
+* app/src/main/java/vandy/mooc/provider/
+* app/src/main/java/vandy/mooc/provider/AcronymContract.java
+* app/src/main/java/vandy/mooc/provider/AcronymDatabaseHelper.java
+* app/src/main/java/vandy/mooc/provider/AcronymProvider.java
+* app/src/main/java/vandy/mooc/provider/cache/
+* app/src/main/java/vandy/mooc/provider/cache/ContentProviderTimeoutCache.java
+* app/src/main/java/vandy/mooc/provider/cache/DeleteCacheReceiver.java
+* app/src/main/java/vandy/mooc/provider/cache/TimeoutCache.java
+* app/src/main/java/vandy/mooc/retrofit/
+* app/src/main/java/vandy/mooc/retrofit/AcronymData.java
+* app/src/main/java/vandy/mooc/retrofit/AcronymWebServiceProxy.java
+* app/src/main/java/vandy/mooc/utils/
+* app/src/main/java/vandy/mooc/utils/AcronymDataArrayAdapter.java
+* app/src/main/java/vandy/mooc/utils/ConfigurableOps.java
+* app/src/main/java/vandy/mooc/utils/GenericActivity.java
+* app/src/main/java/vandy/mooc/utils/GenericAsyncTask.java
+* app/src/main/java/vandy/mooc/utils/GenericAsyncTaskOps.java
+* app/src/main/java/vandy/mooc/utils/LifecycleLoggingActivity.java
+* app/src/main/java/vandy/mooc/utils/RetainedFragmentManager.java
+* app/src/main/java/vandy/mooc/utils/Utils.java
+* app/src/main/res/
+* app/src/main/res/drawable-hdpi/
+* app/src/main/res/drawable-hdpi/ic_launcher.png
+* app/src/main/res/drawable-mdpi/
+* app/src/main/res/drawable-mdpi/ic_launcher.png
+* app/src/main/res/drawable-xhdpi/
+* app/src/main/res/drawable-xhdpi/ic_launcher.png
+* app/src/main/res/layout/
+* app/src/main/res/layout/acronym_data_row.xml
+* app/src/main/res/layout/main_activity.xml
+* app/src/main/res/raw/
+* app/src/main/res/raw/dougs.jpg
+* app/src/main/res/values/
+* app/src/main/res/values/dimens.xml
+* app/src/main/res/values/strings.xml
+* app/src/main/res/values/styles.xml
+* build.gradle
+* gradle/
+* gradle/wrapper/
+* gradle/wrapper/gradle-wrapper.jar
+* gradle/wrapper/gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* index.html
+* settings.gradle
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+gson-2.2.4.jar => com.google.code.gson:gson:2.2.4
+
+Potentially Missing Dependency:
+-------------------------------
+When we replaced the following .jar files with a Gradle dependency, we
+inferred the dependency version number from the filename. This
+specific version may not actually be available from the repository.
+If you get a build error stating that the dependency is missing, edit
+the version number to for example "+" to pick up the latest version
+instead. (This may require you to update your code if the library APIs
+have changed.)
+
+gson-2.2.4.jar => version 2.2.4 in com.google.code.gson:gson:2.2.4
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* libs/retrofit-1.7.0.jar => app/libs/retrofit-1.7.0.jar
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
