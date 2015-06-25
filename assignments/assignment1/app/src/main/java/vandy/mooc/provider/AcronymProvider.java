@@ -127,7 +127,7 @@ public class AcronymProvider extends ContentProvider {
         // row.
         switch (sUriMatcher.match(uri)) {
         case ACRONYMS:
-            // TO DO - replace 0 with code that inserts a row in Table
+            // TODO - replace 0 with code that inserts a row in Table
             // and returns the row id.
             long id = db.insert(AcronymContract.AcronymEntry.TABLE_NAME, null, values);
 
@@ -176,7 +176,7 @@ public class AcronymProvider extends ContentProvider {
             int returnCount = 0;
 
             try {
-                // TO DO -- write the code that inserts all the
+                // TODO -- write the code that inserts all the
                 // contentValues into the SQLite database.
                 for (ContentValues values: contentValues) {
                     db.insert(AcronymContract.AcronymEntry.TABLE_NAME, null, values);
@@ -217,9 +217,9 @@ public class AcronymProvider extends ContentProvider {
         // rows.
         switch (sUriMatcher.match(uri)) {
         case ACRONYMS: 
-            // TO DO -- replace "null" by writing code to query the
+            // TODO -- replace "null" by writing code to query the
             // entire SQLite database based on the parameters passed
-            // into the method.3
+            // into the method.
             retCursor = db.query(AcronymContract.AcronymEntry.TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder, null);
             break;
         case ACRONYM: 
@@ -232,7 +232,7 @@ public class AcronymProvider extends ContentProvider {
                 + ContentUris.parseId(uri)
                 + "'";
 
-            // TO DO -- replace "null" by writing code to query the
+            // TODO -- replace "null" by writing code to query the
             // SQLite database for the particular rowId based on (a
             // subset of) the parameters passed into the method.
             retCursor = db.query(AcronymContract.AcronymEntry.TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder, null);
@@ -276,7 +276,7 @@ public class AcronymProvider extends ContentProvider {
         case ACRONYMS:
             // Updates the rows in the Database and returns no of rows
             // updated.
-            // TO DO -- replace "0" with a call to the SQLite database
+            // TODO -- replace "0" with a call to the SQLite database
             // to update the row(s) in the database based on the
             // parameters passed into this method.
             rowsUpdated = db.update(AcronymContract.AcronymEntry.TABLE_NAME, values, selection, selectionArgs);
@@ -320,7 +320,7 @@ public class AcronymProvider extends ContentProvider {
         // appropriate rows.
         switch (sUriMatcher.match(uri)) {
         case ACRONYMS:
-            // TO DO -- replace "0" with code that deletes the row(s)
+            // TODO -- replace "0" with code that deletes the row(s)
             // in the SQLite database table based on the parameters
             // passed into the method.
             rowsDeleted = db.delete(AcronymContract.AcronymEntry.TABLE_NAME, selection, selectionArgs);

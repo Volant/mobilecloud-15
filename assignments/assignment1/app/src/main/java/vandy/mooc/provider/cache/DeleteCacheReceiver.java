@@ -70,7 +70,6 @@ public class DeleteCacheReceiver extends BroadcastReceiver {
         // the ContentProviderTimeoutCache.
         ContentProviderTimeoutCache cache = new ContentProviderTimeoutCache(context);
         String acronym = intent.getDataString();
-        Log.d(TAG, "Delete cache receiver " + acronym);
         cache.remove(acronym);
     }
 }

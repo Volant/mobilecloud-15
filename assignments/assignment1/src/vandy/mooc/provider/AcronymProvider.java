@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import vandy.mooc.retrofit.AcronymData;
+
 /**
  * Content Provider to access Acronym Database.
  */
@@ -127,7 +129,7 @@ public class AcronymProvider extends ContentProvider {
         case ACRONYMS:
             // TODO - replace 0 with code that inserts a row in Table
             // and returns the row id.
-            long id = 0;
+            long id = db.insert(AcronymContract.AcronymEntry.TABLE_NAME, null, values);
 
             // Check if a new row is inserted or not.
             if (id > 0)
@@ -176,6 +178,9 @@ public class AcronymProvider extends ContentProvider {
             try {
                 // TODO -- write the code that inserts all the
                 // contentValues into the SQLite database.
+                for (ContentValues values: contentValues) {
+                    db.insert(AcronymContract.AcronymEntry.TABLE_NAME, null, values);
+                }
 
                 // Marks the current transaction as successful.
                 db.setTransactionSuccessful();
@@ -205,6 +210,9 @@ public class AcronymProvider extends ContentProvider {
                         String sortOrder) {
         Cursor retCursor;
 
+        final SQLiteDatabase db =
+                mOpenHelper.getWritableDatabase();
+
         // Match the id returned by UriMatcher to query appropriate
         // rows.
         switch (sUriMatcher.match(uri)) {
@@ -212,7 +220,7 @@ public class AcronymProvider extends ContentProvider {
             // TODO -- replace "null" by writing code to query the
             // entire SQLite database based on the parameters passed
             // into the method.
-            retCursor = null;
+            retCursor = db.query(AcronymContract.AcronymEntry.TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder, null);
             break;
         case ACRONYM: 
             // Selection clause that matches row id with id passed
@@ -227,7 +235,7 @@ public class AcronymProvider extends ContentProvider {
             // TODO -- replace "null" by writing code to query the
             // SQLite database for the particular rowId based on (a
             // subset of) the parameters passed into the method.
-            retCursor = null;
+            retCursor = db.query(AcronymContract.AcronymEntry.TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder, null);
             break;
         default:
             throw new UnsupportedOperationException("Unknown uri: " 
@@ -271,7 +279,7 @@ public class AcronymProvider extends ContentProvider {
             // TODO -- replace "0" with a call to the SQLite database
             // to update the row(s) in the database based on the
             // parameters passed into this method.
-            rowsUpdated = 0;
+            rowsUpdated = db.update(AcronymContract.AcronymEntry.TABLE_NAME, values, selection, selectionArgs);
             break;
         default:
             throw new UnsupportedOperationException("Unknown uri: " 
@@ -315,7 +323,7 @@ public class AcronymProvider extends ContentProvider {
             // TODO -- replace "0" with code that deletes the row(s)
             // in the SQLite database table based on the parameters
             // passed into the method.
-            rowsDeleted = 0;
+            rowsDeleted = db.delete(AcronymContract.AcronymEntry.TABLE_NAME, selection, selectionArgs);
             break;
         default:
             throw new UnsupportedOperationException("Unknown uri: " 
