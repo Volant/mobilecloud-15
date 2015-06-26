@@ -5,6 +5,7 @@ import java.util.List;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
+import retrofit.client.Response;
 import vandy.mooc.activities.AcronymActivity;
 import vandy.mooc.provider.cache.ContentProviderTimeoutCache;
 import vandy.mooc.retrofit.AcronymData;
@@ -15,6 +16,8 @@ import vandy.mooc.utils.GenericAsyncTask;
 import vandy.mooc.utils.GenericAsyncTaskOps;
 import android.app.Activity;
 import android.util.Log;
+
+import javax.security.auth.callback.Callback;
 
 /**
  * This class implements all the acronym-related operations defined in
@@ -90,7 +93,10 @@ public class AcronymOps
             // Create a proxy to access the Acronym web service.  TODO
             // -- you fill in here, replacing "null" with the
             // appropriate initialization of the proxy.
-            mAcronymWebServiceProxy = null;
+            mAcronymWebServiceProxy = new RestAdapter.Builder()
+                    .setLogLevel(LogLevel.FULL)
+                    .setEndpoint(AcronymWebServiceProxy.ENDPOINT)
+                    .build().create(AcronymWebServiceProxy.class);
         } else
             // Update the results on the UI.
             updateResultsDisplay();
@@ -101,8 +107,8 @@ public class AcronymOps
      */
     private void updateResultsDisplay() {
         if (mResults != null)
-            mActivity.get().displayResults(mResults, 
-                                           null);
+            mActivity.get().displayResults(mResults,
+                    null);
     }
 
     /**
@@ -155,8 +161,8 @@ public class AcronymOps
                 // two-way Retrofit RPC call.
                 // TODO -- you fill in here, replacying "null" with a
                 // call to the appropriate method on the proxy.
-                AcronymData result = null;
-                        
+                AcronymData result = mAcronymWebServiceProxy.getAcronymResults(acronym).get(0);
+
                 // Get the "long forms" of the acronym expansion.
                 longForms = result.getLfs();
 
@@ -173,6 +179,7 @@ public class AcronymOps
             Log.v(TAG,
                   "doInBackground() "
                   + e);
+            e.printStackTrace();
             return null;
         }
     }

@@ -99,7 +99,7 @@ public class ContentProviderTimeoutCache
             // all rows having that acronym else get the Acronym Data
             // from first row and add it to the List.
             else {
-                // TO DO -- replace "0" with the expiration time of
+                // TODO -- replace "0" with the expiration time of
                 // given acronym that's obtained from the cursor.
                 Long expirationTime = cursor.getLong(cursor.getColumnIndex(AcronymEntry.COLUMN_EXPIRATION_TIME));
                 
@@ -137,13 +137,13 @@ public class ContentProviderTimeoutCache
      * @return AcronymExpansion
      */
     private AcronymExpansion getAcronymExpansion(Cursor cursor) {
-        // TO DO -- replace "null" with the "long form" of the acronym
+        // TODO -- replace "null" with the "long form" of the acronym
         // obtained from the cursor.
         String longForm = cursor.getString(cursor.getColumnIndex(AcronymEntry.COLUMN_LONG_FORM));
-        // TO DO -- replace "0" with the "frequency" value of the acronym
+        // TODO -- replace "0" with the "frequency" value of the acronym
         // obtained from the cursor.
         int frequency = cursor.getInt(cursor.getColumnIndex(AcronymEntry.COLUMN_FREQUENCY));
-        // TO DO -- replace "0" with the "since" value of the acronym
+        // TODO -- replace "0" with the "since" value of the acronym
         // obtained from the cursor.
         int since = cursor.getInt(cursor.getColumnIndex(AcronymEntry.COLUMN_SINCE));
         return new AcronymExpansion(longForm,
@@ -213,7 +213,7 @@ public class ContentProviderTimeoutCache
             new ContentValues[longForms.size()];
 
         for (int i = 0; i < longForms.size(); i++) {
-            // TO DO -- as you loop through the list of acronym
+            // TODO -- as you loop through the list of acronym
             // expansions create a ContentValues object that contains
             // their contents, and store this into the appropriate
             // location the cvArray.
@@ -245,7 +245,7 @@ public class ContentProviderTimeoutCache
         // Initializes an array to contain selection arguments
         String[] selectionArgs = { acronym };
 
-        // TO DO - delete the row(s) associated with an acronym.
+        // TODO - delete the row(s) associated with an acronym.
         mContext.getContentResolver().delete(AcronymEntry.CONTENT_URI, SELECTION_ACRONYM, selectionArgs);
     }
 
@@ -282,7 +282,7 @@ public class ContentProviderTimeoutCache
             String.valueOf(System.nanoTime()) 
         };
 
-        // TO DO -- delete expired acronym expansions.
+        // TODO -- delete expired acronym expansions.
         mContext.getContentResolver().delete(null, SELECTION_EXPIRATION, selectionArgs);
     }
 

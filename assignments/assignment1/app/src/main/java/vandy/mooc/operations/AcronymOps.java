@@ -90,7 +90,7 @@ public class AcronymOps
                 new ContentProviderTimeoutCache
                 (activity.getApplicationContext());
 
-            // Create a proxy to access the Acronym web service.  TO DO
+            // Create a proxy to access the Acronym web service.  TODO
             // -- you fill in here, replacing "null" with the
             // appropriate initialization of the proxy.
             mAcronymWebServiceProxy = new RestAdapter.Builder()
@@ -159,13 +159,9 @@ public class AcronymOps
 
                 // Get the results from Acronym Web service using a
                 // two-way Retrofit RPC call.
-                // TO DO -- you fill in here, replacying "null" with a
+                // TODO -- you fill in here, replacying "null" with a
                 // call to the appropriate method on the proxy.
                 AcronymData result = mAcronymWebServiceProxy.getAcronymResults(acronym).get(0);
-
-                Log.d(TAG, result.toString());
-                Log.d(TAG, result.getSf());
-                Log.d(TAG, result.getLfs().get(0).getLf());
 
                 // Get the "long forms" of the acronym expansion.
                 longForms = result.getLfs();
