@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
+import retrofit.http.Part;
 import retrofit.mime.TypedFile;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.*;
@@ -36,36 +38,54 @@ public class VideoController {
 
 	private static final AtomicLong currentId = new AtomicLong(0L);
 	
+	private VideoFileManager videoFileManager;
+	
     private void checkAndSetId(Video V) {
         if(V.getId() == 0){
             V.setId(currentId.incrementAndGet());
         }
     }
 
-//    @RequestMapping(value="/video/{id}/data", method=RequestMethod.GET)
-//    public @ResponseBody 
+    @RequestMapping(value="/video/{id}/data", method=RequestMethod.GET)
+    public void getVideoData (
+    		@PathVariable("id") Long videoId,
+    		HttpServletResponse response
+    ) throws IOException {
+    	
+    	Video video = videos.get(videoId);
+    	
+    	if (video == null) {
+    		response.sendError(404);
+    		return;
+    	}
+    	
+    	videoFileManager = VideoFileManager.get();
+    	
+    	response.setContentType("video/mp4");
+    	videoFileManager.copyVideoData(video, response.getOutputStream());
+    }
     
     @RequestMapping(value="/video/{id}/data", method=RequestMethod.POST)
     public @ResponseBody VideoStatus addVideoData (
     		@PathVariable("id") Long videoId,
-    		@RequestParam("data") MultipartFile videoData,
+    		@RequestParam("data") List<MultipartFile> files,
     		HttpServletResponse response
     ) throws IOException {
     	
-    	Logger log = Logger.getLogger(ClassName.class.getName());
-    	
     	VideoStatus status = new VideoStatus(VideoState.READY);
 
-    	log.log(Level.INFO, "get request with ID " + videoId, 1);
-    	
     	Video v = videos.get(videoId);
     	
     	if (null == v) {
+    		// There is no state 'ERROR'. Processing is set to mark the state is not READY
     		status.setState(VideoState.PROCESSING);
-    		log.log(Level.INFO, "Sending error", 1);
     		response.sendError(404);
-    		log.log(Level.INFO, "WOW", 1);
+    		return status;
     	}
+    	
+    	videoFileManager = VideoFileManager.get();
+    	
+    	videoFileManager.saveVideoData(v, files.get(0).getInputStream());
     	
     	return status;
     }
@@ -89,7 +109,7 @@ public class VideoController {
 		v_in.setLocation(v.getLocation());
 		v_in.setSubject(v.getSubject());
 		checkAndSetId(v_in);
-		v_in.setDataUrl("AAAA");
+		v_in.setDataUrl("FILE_PATH");
 		
 		videos.put(v_in.getId(), v_in);
 		
