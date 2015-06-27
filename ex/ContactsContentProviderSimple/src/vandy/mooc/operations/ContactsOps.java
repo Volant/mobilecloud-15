@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import vandy.mooc.activities.ContactsActivity;
-import vandy.mooc.utils.ConfigurableOps;
-import vandy.mooc.utils.Utils;
+import vandy.mooc.common.ConfigurableOps;
+import vandy.mooc.common.Utils;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -58,16 +58,32 @@ public class ContactsOps implements ConfigurableOps {
      */
     protected final List<String> mContacts =
         new ArrayList<String>(Arrays.asList(new String[] 
-            { "Jimmy Buffet", 
+            { "Jimmy Buffett",
               "Jimmy Carter",
               "Jimmy Choo", 
-              "Jiminy Cricket", 
+              "Jimmy Connors", 
+              "Jiminy Cricket",
+              "Jimmy Durante",
               "Jimmy Fallon",
               "Jimmy Kimmel", 
               "Jimi Hendrix", 
               "Jimmy Johns",
               "Jimmy Johnson",
-              "Jimmy Page", }));
+              "Jimmy Page", 
+              "Jimmy Swaggart", 
+            }));
+
+    /**
+     * The types of ContactCommands.
+     */
+    enum ContactsCommandType {
+        INSERT_COMMAND,
+        QUERY_COMMAND,
+        DELETE_COMMAND,
+    }
+
+    ContactsCommand mCommands[] =
+        new ContactsCommand[ContactsCommandType.values().length];
 
     /**
      * This default constructor must be public for the GenericOps
@@ -92,13 +108,32 @@ public class ContactsOps implements ConfigurableOps {
         mActivity = 
             new WeakReference<>((ContactsActivity) activity);
 
-        if (firstTimeIn)
+        if (firstTimeIn) {
             // Initialize the Google account information.
             initializeAccount();
-        else if (mCursor != null)
+
+            initializeCommands();
+        } else if (mCursor != null)
             // Redisplay the contents of the cursor after a runtime
             // configuration change.
             mActivity.get().displayCursor(mCursor);
+    }
+
+    private void initializeCommands() {
+        // Create a command that executes a GenericAsyncTask to
+        // perform the insertions off the UI Thread.
+        mCommands[ContactsCommandType.INSERT_COMMAND.ordinal()] =
+            new InsertContactsCommand(this);
+
+        // Create a command that executes a GenericAsyncTask to
+        // perform the Query off the UI Thread.
+        mCommands[ContactsCommandType.QUERY_COMMAND.ordinal()] =
+            new QueryContactsCommand(this);
+
+        // Create a command that executes a GenericAsyncTask to
+        // perform the deletions off the UI Thread.
+        mCommands[ContactsCommandType.DELETE_COMMAND.ordinal()] =
+            new DeleteContactsCommand(this);
     }
 
     /**
@@ -107,30 +142,24 @@ public class ContactsOps implements ConfigurableOps {
     public void runInsertContactCommand() {
         // Reset mCursor and reset the display to show nothing.
         mActivity.get().displayCursor(mCursor = null);
-
-        // Create a command that executes a GenericAsyncTask to
-        // perform the insertions off the UI Thread.
-        new InsertContactsCommand(this, 
-                                  mContacts.iterator()).run();
+        mCommands[ContactsCommandType.INSERT_COMMAND.ordinal()].execute
+            (mContacts.iterator());
     }
 
     /**
      * Query the contacts.
      */
     public void runQueryContactsCommand() {
-        // Create a command that executes a GenericAsyncTask to
-        // perform the Query off the UI Thread.
-        new QueryContactsCommand(this).run();
+        mCommands[ContactsCommandType.QUERY_COMMAND.ordinal()].execute
+            (mContacts.iterator());
     }
 
     /**
      * Delete the contacts.
      */
     public void runDeleteContactCommand() {
-        // Create a command that executes a GenericAsyncTask to
-        // perform the deletions off the UI Thread.
-        new DeleteContactsCommand(this,
-                                  mContacts.iterator()).run();
+        mCommands[ContactsCommandType.DELETE_COMMAND.ordinal()].execute
+            (mContacts.iterator());
     }
 
     /**
