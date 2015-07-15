@@ -1,0 +1,162 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .idea/
+* .idea/.name
+* .idea/compiler.xml
+* .idea/copyright/
+* .idea/copyright/profiles_settings.xml
+* .idea/misc.xml
+* .idea/modules.xml
+* .idea/vcs.xml
+* .idea/workspace.xml
+* README.md
+* app/
+* app/build.gradle
+* app/libs/
+* app/libs/com.fasterxml.jackson.annotations.jar
+* app/libs/commons-io-2.4.jar
+* app/libs/retrofit-1.9.0.jar
+* app/src/
+* app/src/main/
+* app/src/main/AndroidManifest.xml
+* app/src/main/java/
+* app/src/main/java/vandy/
+* app/src/main/java/vandy/mooc/
+* app/src/main/java/vandy/mooc/common/
+* app/src/main/java/vandy/mooc/common/ConfigurableOps.java
+* app/src/main/java/vandy/mooc/common/ContextView.java
+* app/src/main/java/vandy/mooc/common/GenericActivity.java
+* app/src/main/java/vandy/mooc/common/GenericAsyncTask.java
+* app/src/main/java/vandy/mooc/common/GenericAsyncTaskOps.java
+* app/src/main/java/vandy/mooc/common/LifecycleLoggingActivity.java
+* app/src/main/java/vandy/mooc/common/RetainedFragmentManager.java
+* app/src/main/java/vandy/mooc/common/Utils.java
+* app/src/main/java/vandy/mooc/model/
+* app/src/main/java/vandy/mooc/model/mediator/
+* app/src/main/java/vandy/mooc/model/mediator/VideoDataMediator.java
+* app/src/main/java/vandy/mooc/model/mediator/webdata/
+* app/src/main/java/vandy/mooc/model/mediator/webdata/Video.java
+* app/src/main/java/vandy/mooc/model/mediator/webdata/VideoServiceProxy.java
+* app/src/main/java/vandy/mooc/model/mediator/webdata/VideoStatus.java
+* app/src/main/java/vandy/mooc/model/services/
+* app/src/main/java/vandy/mooc/model/services/UploadVideoService.java
+* app/src/main/java/vandy/mooc/presenter/
+* app/src/main/java/vandy/mooc/presenter/VideoOps.java
+* app/src/main/java/vandy/mooc/utils/
+* app/src/main/java/vandy/mooc/utils/Constants.java
+* app/src/main/java/vandy/mooc/utils/VideoMediaStoreUtils.java
+* app/src/main/java/vandy/mooc/utils/VideoStorageUtils.java
+* app/src/main/java/vandy/mooc/view/
+* app/src/main/java/vandy/mooc/view/VideoListActivity.java
+* app/src/main/java/vandy/mooc/view/ui/
+* app/src/main/java/vandy/mooc/view/ui/FloatingActionButton.java
+* app/src/main/java/vandy/mooc/view/ui/VideoAdapter.java
+* app/src/main/res/
+* app/src/main/res/drawable-hdpi/
+* app/src/main/res/drawable-hdpi/ic_launcher.png
+* app/src/main/res/drawable-hdpi/ic_thumbnail_placeholder.png
+* app/src/main/res/drawable-hdpi/ic_video.png
+* app/src/main/res/drawable-mdpi/
+* app/src/main/res/drawable-mdpi/ic_launcher.png
+* app/src/main/res/drawable-mdpi/ic_thumbnail_placeholder.png
+* app/src/main/res/drawable-mdpi/ic_video.png
+* app/src/main/res/drawable-xhdpi/
+* app/src/main/res/drawable-xhdpi/ic_launcher.png
+* app/src/main/res/drawable-xhdpi/ic_thumbnail_placeholder.png
+* app/src/main/res/drawable-xhdpi/ic_video.png
+* app/src/main/res/drawable-xxhdpi/
+* app/src/main/res/drawable-xxhdpi/ic_launcher.png
+* app/src/main/res/drawable-xxhdpi/ic_thumbnail_placeholder.png
+* app/src/main/res/drawable-xxhdpi/ic_video.png
+* app/src/main/res/drawable-xxxhdpi/
+* app/src/main/res/drawable-xxxhdpi/ic_thumbnail_placeholder.png
+* app/src/main/res/drawable-xxxhdpi/ic_video.png
+* app/src/main/res/drawable/
+* app/src/main/res/drawable/actionbar_background.xml
+* app/src/main/res/layout/
+* app/src/main/res/layout/video_list_activity.xml
+* app/src/main/res/layout/video_list_item.xml
+* app/src/main/res/menu/
+* app/src/main/res/menu/main.xml
+* app/src/main/res/menu/video_list.xml
+* app/src/main/res/values-v11/
+* app/src/main/res/values-v11/styles.xml
+* app/src/main/res/values-v14/
+* app/src/main/res/values-v14/styles.xml
+* app/src/main/res/values-w820dp/
+* app/src/main/res/values-w820dp/dimens.xml
+* app/src/main/res/values/
+* app/src/main/res/values/attrs.xml
+* app/src/main/res/values/colors.xml
+* app/src/main/res/values/dimens.xml
+* app/src/main/res/values/strings.xml
+* app/src/main/res/values/styles.xml
+* build.gradle
+* gradle/
+* gradle/wrapper/
+* gradle/wrapper/gradle-wrapper.jar
+* gradle/wrapper/gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* ic_launcher-web.png
+* proguard-project.txt
+* settings.gradle
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:22.2.0
+gson-2.2.4.jar => com.google.code.gson:gson:2.2.4
+
+Potentially Missing Dependency:
+-------------------------------
+When we replaced the following .jar files with a Gradle dependency, we
+inferred the dependency version number from the filename. This
+specific version may not actually be available from the repository.
+If you get a build error stating that the dependency is missing, edit
+the version number to for example "+" to pick up the latest version
+instead. (This may require you to update your code if the library APIs
+have changed.)
+
+gson-2.2.4.jar => version 2.2.4 in com.google.code.gson:gson:2.2.4
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* libs/com.fasterxml.jackson.annotations.jar => app/libs/com.fasterxml.jackson.annotations.jar
+* libs/commons-io-2.4.jar => app/libs/commons-io-2.4.jar
+* libs/retrofit-1.9.0.jar => app/libs/retrofit-1.9.0.jar
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
