@@ -6,5 +6,8 @@
     <string name="content_authority">vandy.mooc</string>
     <string name="thumbnail_image">Thumbnail Image</string>
     <string name="title_upload_video">Upload Video by </string>
+    <string name="title_activity_video_view">VideoViewActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

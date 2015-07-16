@@ -3,6 +3,7 @@ package vandy.mooc.view;
 import vandy.mooc.R;
 import vandy.mooc.common.GenericActivity;
 import vandy.mooc.common.Utils;
+import vandy.mooc.model.mediator.webdata.Video;
 import vandy.mooc.model.services.UploadVideoService;
 import vandy.mooc.presenter.VideoOps;
 import vandy.mooc.view.ui.FloatingActionButton;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
@@ -59,6 +61,7 @@ public class VideoListActivity
      */
     private ListView mVideosList;
 
+    private final String VIDEO_POSITION = "VIDEO_POSITION";
   
     /**
      * Hook method called when a new instance of Activity is created.
@@ -94,12 +97,23 @@ public class VideoListActivity
             }
         });
 
+        mVideosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(VideoListActivity.this, VideoViewActivity.class);
+                Video v;
+
+                intent.putExtra(VIDEO_POSITION, position);
+                startActivity(intent);
+            }
+        });
+
         // Invoke the special onCreate() method in GenericActivity,
         // passing in the VideoOps class to instantiate/manage and
         // "this" to provide VideoOps with the VideoOps.View instance.
         super.onCreate(savedInstanceState,
-                       VideoOps.class,
-                       this);
+            VideoOps.class,
+            this);
     }
     
     
@@ -193,7 +207,7 @@ public class VideoListActivity
         // Register the BroadcastReceiver.
         LocalBroadcastManager.getInstance(this)
                .registerReceiver(mUploadResultReceiver,
-                                 intentFilter);
+                       intentFilter);
     }
 
     /**
@@ -258,7 +272,7 @@ public class VideoListActivity
         // Inflate the menu; this adds items to the action bar if it
         // is present.
         getMenuInflater().inflate(R.menu.video_list,
-                                  menu);
+                menu);
         return true;
     }
 
@@ -279,4 +293,5 @@ public class VideoListActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
